@@ -80,7 +80,7 @@ public class LinphonePlugin extends Plugin {
                         notifyListeners("callState", d);
 
                         if (state == Call.State.StreamsRunning || state == Call.State.Connected) {
-                            if (!userChoseRoute) autoRoute();
+                            // Default to earpiece (proven). Bluetooth/speaker via the in-call selector.
                             applyRoute();
                             notifyAudioDevices();
                         } else if (state == Call.State.End || state == Call.State.Released || state == Call.State.Error) {
@@ -92,8 +92,8 @@ public class LinphonePlugin extends Plugin {
 
                     @Override
                     public void onAudioDevicesListUpdated(Core core) {
-                        // A Bluetooth/wired headset was just (dis)connected mid-call.
-                        if (!userChoseRoute) autoRoute();
+                        // Re-apply the CURRENT route only (no auto-switching — that
+                        // mis-detected devices and forced audio to the speaker).
                         applyRoute();
                         notifyAudioDevices();
                     }
