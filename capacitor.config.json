@@ -1,0 +1,13 @@
+{
+  "appId": "pk.ringovo.app",
+  "appName": "Ringovo",
+  "webDir": "www",
+  "server": {
+    "url": "https://app.ringovo.pk",
+    "cleartext": false,
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

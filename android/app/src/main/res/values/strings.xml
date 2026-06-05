@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Ringovo</string>
+    <string name="title_activity_main">Ringovo</string>
+    <string name="package_name">pk.ringovo.app</string>
+    <string name="custom_url_scheme">pk.ringovo.app</string>
+</resources>
