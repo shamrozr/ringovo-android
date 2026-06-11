@@ -37,7 +37,7 @@ jobs:
           RUN_NUMBER: ${{ github.run_number }}
         run: |
           sed -i "s/versionCode 1/versionCode ${RUN_NUMBER}/" android/app/build.gradle
-          sed -i "s/versionName \"1.0\"/versionName \"1.0.${RUN_NUMBER}\"/" android/app/build.gradle
+          sed -i "s/versionName \"1.0\"/versionName \"0.2.${RUN_NUMBER}\"/" android/app/build.gradle
 
       - name: Capacitor sync
         run: npx cap sync android
@@ -51,13 +51,13 @@ jobs:
       - name: Rename APK
         env:
           RUN_NUMBER: ${{ github.run_number }}
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk "ringovo-v1.0.${RUN_NUMBER}.apk"
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk "ringovo-v0.2.${RUN_NUMBER}.apk"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: ringovo-debug-apk
-          path: ringovo-v1.0.${{ github.run_number }}.apk
+          path: ringovo-v0.2.${{ github.run_number }}.apk
           if-no-files-found: error
 
       - name: Publish Release
@@ -66,7 +66,7 @@ jobs:
           RUN_NUMBER: ${{ github.run_number }}
           SHA: ${{ github.sha }}
         run: |
-          gh release create "v1.0.${RUN_NUMBER}" "ringovo-v1.0.${RUN_NUMBER}.apk" \
-            --title "Ringovo Android v1.0.${RUN_NUMBER}" \
+          gh release create "v0.2.${RUN_NUMBER}" "ringovo-v0.2.${RUN_NUMBER}.apk" \
+            --title "Ringovo Android v0.2.${RUN_NUMBER}" \
             --notes "Automated build from commit ${SHA}. Install the APK on Android (enable unknown sources), allow the mic, log in." \
             --latest
